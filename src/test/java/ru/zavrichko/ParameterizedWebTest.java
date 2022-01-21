@@ -25,20 +25,19 @@ public class ParameterizedWebTest {
 
 
 
-//    @DisplayName("Тестирование общего алгоритма поиска")
-//    @CsvSource(value = {
-//            "Selenide, Вышла Selenide ",
-//            "Junit, 5 is the next generation of "
-//    })
-//    @ParameterizedTest(name = "Тестирование общего алгоритма поиска с тестовыми данными: {0}")
-//    void csvSearchTest(String testData, String expectedResult) {
-//        open("https://ya.ru");
-//        $("#text").setValue(testData);
-//        $("button[type='submit']").click();
-//        $$("li.serp-item")
-//                .first()
-//                .shouldHave(text(expectedResult));
-//    }
+    @DisplayName("Тестирование общего алгоритма поиска")
+    @CsvSource(value = {
+            "car, 2006",
+           // "map, The Map of Tiny Perfect Things"
+    })
+    @ParameterizedTest(name = "Тестирование общего алгоритма поиска с тестовыми данными: {0}")
+    void csvSearchTest(String testData, String expectedResult) {
+        open("https://www.amazon.com/");
+        $("#twotabsearchtextbox").setValue(testData);
+        $("#nav-search-submit-button]").click();
+        $(".sg-col-inner")
+                .shouldHave(text(expectedResult));
+    }
 
 
 
