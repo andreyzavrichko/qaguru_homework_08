@@ -11,9 +11,9 @@ import static com.codeborne.selenide.Selenide.*;
 public class ParameterizedWebTest {
 
     // value source
-    @DisplayName("Тестирование общего алгоритма поиска")
+    @DisplayName("Тестирование общего алгоритма поиска Amazon")
     @ValueSource(strings = {"car", "map"})
-    @ParameterizedTest(name = "Тестирование общего алгоритма поиска с тестовыми данными: {0}")
+    @ParameterizedTest(name = "Тестирование общего алгоритма поиска Amazon с тестовыми данными: {0}")
     void commonSearchTest(String testData) {
         open("https://www.amazon.com/");
         $("#twotabsearchtextbox").setValue(testData);
@@ -22,25 +22,18 @@ public class ParameterizedWebTest {
                 .shouldHave(text(testData));
     }
 
-
-
-
-    @DisplayName("Тестирование общего алгоритма поиска")
+    // csv source
+    @DisplayName("Тестирование общего алгоритма поиска Amazon")
     @CsvSource(value = {
-            "car, 2006",
-           // "map, The Map of Tiny Perfect Things"
+            "car, Cars",
+            "map, The Map of Tiny Perfect Things"
     })
-    @ParameterizedTest(name = "Тестирование общего алгоритма поиска с тестовыми данными: {0}")
+    @ParameterizedTest(name = "Тестирование общего алгоритма поиска Amazon с тестовыми данными: {0}")
     void csvSearchTest(String testData, String expectedResult) {
         open("https://www.amazon.com/");
         $("#twotabsearchtextbox").setValue(testData);
-        $("#nav-search-submit-button]").click();
-        $(".sg-col-inner")
+        $("#nav-search-submit-button").click();
+        $("#search")
                 .shouldHave(text(expectedResult));
     }
-
-
-
-
-
 }
